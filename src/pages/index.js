@@ -1,29 +1,60 @@
 import * as React from "react"
-import { Link } from "gatsby"
-import { StaticImage } from "gatsby-plugin-image"
+import { Link, useStaticQuery, graphql } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <StaticImage
-      src="../images/gatsby-astronaut.png"
-      width={300}
-      quality={95}
-      formats={["AUTO", "WEBP", "AVIF"]}
-      alt="A Gatsby astronaut"
-      style={{ marginBottom: `1.45rem` }}
-    />
-    <p>
-      <Link to="/page-2/">Go to page 2</Link> <br />
-      <Link to="/using-typescript/">Go to "Using TypeScript"</Link>
-    </p>
-  </Layout>
-)
+const IndexPage = () => {
+
+  const data = useStaticQuery(graphql`
+    query {
+      allContentfulPlaces (
+        sort:{
+          fields: createdAt,
+          order: ASC
+        }
+      ) {
+        edges {
+          node {
+            contentful_id
+            title
+            coordinates {
+              lon
+              lat
+            }
+            slug
+            createdAt(formatString: "MMMM Do, YYYY")
+            updatedAt(fromNow: true)
+          }
+        }
+      }
+    }
+  `)
+
+  return (
+    <Layout>
+      <SEO title="Home" />
+      <div style={{ display: `grid`, gridTemplateColumns: `33.33% 33.33% 33.33%`, gridGap: `20px` }}>
+      {
+        data.allContentfulPlaces.edges.map(edge => {
+          const place = edge.node;
+          return (
+            <div key={place.contentful} style={{  }}>
+              <h2>{place.title} </h2>
+              <span><Link to={`/places/${place.slug}`}>Read more</Link></span>
+              <p style={{ fontSize: `14px` }}>
+                Created on {place.createdAt}<br/>
+                Last updated {place.updatedAt}
+              </p>
+              
+            </div>
+          )
+        })
+      }
+      </div>
+
+    </Layout>
+  )
+}
 
 export default IndexPage

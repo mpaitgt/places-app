@@ -10,46 +10,56 @@ import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 
 import Header from "./header"
+import Footer from './footer'
 import "./layout.css"
 
-const Layout = ({ children }) => {
+const Layout = ({ children, zip, setZip }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
         siteMetadata {
           title
+          description
         }
       }
     }
   `)
 
   return (
-    <>
-      <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: 960,
-          padding: `0 1.0875rem 1.45rem`,
-        }}
-      >
-        <main>{children}</main>
-        <footer
+    <div style={{ display: `flex`, flexDirection: `column`, minHeight: `100vh` }}>
+      <div style={{ flexGrow: `1` }}>
+        <Header 
+          siteTitle={data.site.siteMetadata?.title || `Title`}
+          description={data.site.siteMetadata?.description || `Description`}
+          zip={zip}
+          setZip={setZip}
+        />
+        <div
           style={{
-            marginTop: `2rem`,
+            margin: `0 auto`,
+            maxWidth: 960,
+            padding: `0 1.0875rem 1.45rem`,
           }}
         >
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.com">Gatsby</a>
-        </footer>
+          <main>{children}</main>
+        </div>
       </div>
-    </>
+      <Footer />
+    </div>
   )
 }
 
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
-}
+// Layout.propTypes = {
+//   children: PropTypes.node.isRequired,
+//   zip: PropTypes.string,
+//   setZip: PropTypes.func
+// }
+
+// Layout.defaultProps = {
+//   zip: '',
+//   setZip: function() {
+//     return "setZip - that didn't work."
+//   }
+// }
 
 export default Layout

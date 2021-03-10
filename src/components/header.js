@@ -2,11 +2,11 @@ import * as React from "react"
 import PropTypes from "prop-types"
 import { Link } from "gatsby"
 
-const Header = ({ siteTitle }) => (
+const Header = ({ siteTitle, description }) => (
   <header
     style={{
-      background: `rebeccapurple`,
-      marginBottom: `1.45rem`,
+      background: `coral`,
+      marginBottom: `1.45rem`
     }}
   >
     <div
@@ -14,29 +14,61 @@ const Header = ({ siteTitle }) => (
         margin: `0 auto`,
         maxWidth: 960,
         padding: `1.45rem 1.0875rem`,
+        paddingBottom: `0.5rem`,
+        display: `flex`,
+        justifyContent: `space-between`,
+        alignItems: `flex-end`
       }}
     >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          {siteTitle}
-        </Link>
-      </h1>
+      <div style={{
+
+      }}>
+        <h1 style={{ margin: 0 }}>
+          <Link
+            to="/"
+            style={{
+              color: `white`,
+              textDecoration: `none`,
+            }}
+          >
+            {siteTitle}
+          </Link>
+        </h1>
+        {/* <p style={{
+          display: `inline-block`
+        }}>
+          {description}
+        </p> */}
+      </div>
+
+
+      <div style={{ display: `flex`, fontSize: `14px` }}>
+          <input  style={{ 
+            border: `none`,
+            padding: `0.2rem 0.8rem`
+           }} type="text" />
+          <button style={{
+            border: `none`,
+            alignSelf: `stretch`,
+            background: `#ffd2a2`,
+            padding: `0.2rem 1rem`,
+            borderTopRightRadius: `10px`
+          }}>Search</button>
+
+      </div>
+
     </div>
   </header>
 )
 
 Header.propTypes = {
   siteTitle: PropTypes.string,
+  description: PropTypes.string
 }
 
 Header.defaultProps = {
   siteTitle: ``,
+  description: ``
 }
 
 export default Header
