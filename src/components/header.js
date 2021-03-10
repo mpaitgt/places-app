@@ -45,15 +45,18 @@ const Header = ({ siteTitle, description }) => (
       <div style={{ display: `flex`, fontSize: `14px` }}>
           <input  style={{ 
             border: `none`,
+            // background: `#ffd2a2`,
             padding: `0.2rem 0.8rem`
            }} type="text" />
           <button style={{
             border: `none`,
             alignSelf: `stretch`,
-            background: `#ffd2a2`,
+            background: `#ffbb72`,
             padding: `0.2rem 1rem`,
-            borderTopRightRadius: `10px`
-          }}>Search</button>
+            color: `white`,
+            fontWeight: `700`,
+            // borderTopRightRadius: `10px`
+          }}>Search any place</button>
 
       </div>
 

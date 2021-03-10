@@ -3,7 +3,7 @@ dotenv.config()
 
 module.exports = {
   siteMetadata: {
-    title: `Places`,
+    title: `Placespace`,
     description: ``,
     author: `@matt_pignatore`,
     email: `mattpignatore@gmail.com`,

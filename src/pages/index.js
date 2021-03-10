@@ -34,6 +34,10 @@ const IndexPage = () => {
   return (
     <Layout>
       <SEO title="Home" />
+      <div style={{ marginBottom: `40px`, display: `flex` }}>
+        <input style={{ border: `none`, borderBottom: `2px solid coral`, padding: `0.25rem 1rem` }} type="text"></input>
+        <button style={{ border: `none`, borderBottom: `2px solid coral`, padding: `0.25rem 1rem`, color: `coral`, background: `transparent` }}>Search saved places</button>
+      </div>
       <div style={{ display: `grid`, gridTemplateColumns: `33.33% 33.33% 33.33%`, gridGap: `20px` }}>
       {
         data.allContentfulPlaces.edges.map(edge => {
