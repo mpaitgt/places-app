@@ -34,30 +34,22 @@ const Header = ({ siteTitle, description }) => (
             {siteTitle}
           </Link>
         </h1>
-        {/* <p style={{
-          display: `inline-block`
-        }}>
-          {description}
-        </p> */}
       </div>
 
 
       <div style={{ display: `flex`, fontSize: `14px` }}>
-          <input  style={{ 
-            border: `none`,
-            // background: `#ffd2a2`,
-            padding: `0.2rem 0.8rem`
-           }} type="text" />
-          <button style={{
-            border: `none`,
-            alignSelf: `stretch`,
-            background: `#ffbb72`,
-            padding: `0.2rem 1rem`,
-            color: `white`,
-            fontWeight: `700`,
-            // borderTopRightRadius: `10px`
-          }}>Search any place</button>
-
+        <input  style={{ 
+          border: `none`,
+          padding: `0.2rem 0.8rem`
+          }} type="text" />
+        <button style={{
+          border: `none`,
+          alignSelf: `stretch`,
+          background: `#ffbb72`,
+          padding: `0.2rem 1rem`,
+          color: `white`,
+          fontWeight: `700`,
+        }}>Search any place</button>
       </div>
 
     </div>
