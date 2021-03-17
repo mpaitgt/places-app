@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { Link, graphql } from 'gatsby'
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
+// import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import moment from 'moment'
 
 const Place = ({ zip, data }) => {
@@ -14,8 +14,7 @@ const Place = ({ zip, data }) => {
 
   useEffect(() => {
     fetchForecast()
-    // fetchCurrently()
-  }, [])
+  }, [forecast])
 
   const fetchForecast = async () => {
     const queryURL = `https://api.openweathermap.org/data/2.5/forecast/daily?lat=${place.coordinates.lat}&lon=${place.coordinates.lon}&units=imperial&appid=${APIKey}`
@@ -48,32 +47,24 @@ const Place = ({ zip, data }) => {
         <h1>{place.title}</h1>
         <p>Created on {place.createdAt}</p>
         <div style={{ display: `grid`, gridTemplateColumns: `repeat(7, 1fr)` }}>
-          {/* <div>
-            {
-              place.body 
-              ?
-              documentToReactComponents(JSON.parse(place.body.raw))
-              :
-              ''
-            }
-          </div> */}
-            {
-              loaded
-              ?
-              forecast.list.map(item => {
-                return (
-                  <div key={item.dt}>
-                    {moment.unix(item.dt).format('dddd')}<br/>
-                    {moment.unix(item.dt).format('MMMM DD')}
-                    <br />
-                    <img src={`http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`}></img>
-                    {Math.floor(item.temp.day)}&#176;
-                  </div>
-                )
-              })
-              :
-              ''
-            }
+          {
+            loaded
+            ?
+            forecast.list.map(item => {
+              return (
+                <div key={item.dt}>
+                  {moment.unix(item.dt).format('dddd')}
+                  <br/>
+                  {moment.unix(item.dt).format('MMMM DD')}
+                  <br />
+                  <img src={`http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`} alt="weather icon"></img>
+                  {Math.floor(item.temp.day)}&#176;
+                </div>
+              )
+            })
+            :
+            ''
+          }
         </div>
 
       </div>
